@@ -16,7 +16,7 @@ class RecetasController {
 	def static void main(String[] args) {
 		XTRest.start(RecetasController, 9000)
 	}
-	 
+	 //a
 	
 	@Get("/recetas")
 	def Result Recetas() {
