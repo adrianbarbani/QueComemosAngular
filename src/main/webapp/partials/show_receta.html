@@ -1,0 +1,119 @@
+<div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Detalles de Receta</h3>
+    </div>
+    <div class="modal-body">
+        
+        <div class="center-block"  style=" border-style: solid; width: 95%" >
+              <div class="center-block" style="width: 98%">
+              <h4 id="sizing-addon2">
+               {{showCtrl.receta.nombre}}
+              </h4>
+              <ul class="list-inline">
+                <li>
+                  {{showCtrl.receta.calorias}} calorias
+                </li>
+                <li>{{showCtrl.receta.tipo}}</li>
+              </ul>
+              </div>
+          </div>
+      
+      <div  class="center-block" style="width: 95%" >
+          <table style="width: 100%; height:90%">
+            
+            <tr>
+              <td>
+                <strong>Dificultad</strong>
+                <p>{{showCtrl.receta.dificultad}}</p>
+              </td>
+              
+              
+              <td>
+                <strong>Temporada</strong>
+                <p>{{showCtrl.receta.temporada}}</p>
+              </td>
+            </tr>
+            
+            
+            <tr>
+              <td>
+                <strong>Ingredientes</strong>
+              </td>
+              <td>
+              <strong>Condimentos</strong>
+              </td>
+            </tr>
+            <tr>                
+              <td>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                    <th>Dosis</th>
+                    <th>Ingredientes</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <tr ng-repeat="ingrediente in showCtrl.receta.ingredientes">
+                        <td>
+                          {{ingrediente.cantidad}}
+                        </td>
+                        <td>
+                          {{ingrediente.nombre}}
+                        </td>
+                      </tr>
+                    </g:each>
+                  </tbody>
+                </table>
+              </td>
+              <td>
+                  <div  class="center-block" style=" border-style: solid; width: 90%; height:100%">
+                      <p ng-repeat="condimentos in showCtrl.receta.condimentos">
+                          {{condimentos}}
+                      </p>
+                  </div>
+              </td>
+              </tr>
+              <tr>
+                <td>
+                <input type="checkbox"> Agregar Receta a mis favoritas
+                </td>
+                <td>
+                  <strong>Condiciones Preexistentes</strong>
+                  <div  class="center-block" style=" border-style: solid; width: 90%; height:100%">
+                      <p ng-repeat="condiciones in showCtrl.receta.condiciones">
+                          {{condiciones}}
+                      </p>
+                  </div>
+                </td>
+              </tr> 
+            
+          </table>
+      </div>  
+        
+      </div>
+      
+      
+      
+      <div  class="center-block" style=" border-style: solid; width: 90%; background-color: #CDCDCD" >
+        
+        <p class="text-center">{{showCtrl.receta.descripcion}}</p>
+        
+      </div>
+      
+      <div class="modal-footer">
+          <g:link controller='login' ng-click="showCtrl.volver()" class="btn btn-primary">Volver</g:link>
+        
+        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Volver</button>
+        <button type="button" class="btn btn-primary">Copiar Receta</button> -->
+        
+        <g:link controller= "login" action="copiarLaReceta" class="btn btn-primary" id="${Receta.unaReceta.nombreDelPlato}">Copiar</g:link>
+        
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  </div>
+
+</div>
