@@ -1,4 +1,4 @@
-recetasListApp.service("RecetasService", function ($http) {
+recetasListApp.service("recetasService", function ($http) {
 
 
   this.findAll = function(callback) {
@@ -24,5 +24,6 @@ recetasListApp.service("RecetasService", function ($http) {
       this.agregarReceta(new Receta("Ravioles", 1600, "Dificil", "Otoño"));
       };    
   };*/
+  
 
 });

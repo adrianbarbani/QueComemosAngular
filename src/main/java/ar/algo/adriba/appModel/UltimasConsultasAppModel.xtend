@@ -11,7 +11,7 @@ class UltimasConsultasAppModel {
 		//Hardcodeo un usuario
 
 	Receta recetaSeleccionada
-	List<Receta> resultados = newArrayList
+	public List<Receta> resultados = newArrayList 
 	List<Receta> ultimasConsultadas = newArrayList
 	boolean filtrosAplicados = false
 	String descripcion

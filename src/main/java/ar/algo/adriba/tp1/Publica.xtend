@@ -1,10 +1,12 @@
 package ar.algo.adriba.tp1
 
-import ar.algo.adriba.tp1.TipoReceta
+import org.eclipse.xtend.lib.annotations.Accessors
 
+@Accessors
 class Publica implements TipoReceta {
 
 	//Receta recetaAModificar
+	
 	
 	override sePuedeSugerir() {
 		true

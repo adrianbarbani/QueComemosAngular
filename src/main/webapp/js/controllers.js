@@ -1,16 +1,20 @@
-recetasListApp.controller('ListarRecetasController', function (RecetasService) {
+"use strict";
+recetasListApp.controller('ListarRecetasController', function (recetasService) {
 
-var self = this;
+  var self = this;
+  this.recetas = [];
 
-  this.tareas = [];
-
-  this.getTareas = function() {
-      tareasService.findAll(function(data) {
-        self.tareas = data;
+  this.getRecetas = function() {
+      recetasService.findAll(function(data) {
+        self.recetas = data;
       });
   } 
 
-  this.getTareas();
+  this.getRecetas();
+  
+
+ 
+ 
   /*this.recetas = RecetasService.recetas;
   RecetasService.listarRecetas();*/
    
@@ -19,9 +23,9 @@ var self = this;
 });
 
 
-recetasListApp.controller('ShowRecetaController', function ($stateParams, $state, RecetasService) {
+recetasListApp.controller('ShowRecetaController', function ($stateParams, $state, recetasService) {
 
-  this.receta = RecetasService.getRecetaByNombre($stateParams.id);
+  this.receta = recetasService.getRecetaByNombre($stateParams.id);
 
   if (!this.receta) {
     $state.go("listarReceta");

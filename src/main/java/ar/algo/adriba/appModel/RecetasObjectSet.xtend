@@ -110,15 +110,6 @@ class RecetasObjectSet {
 			.setearPreparacion("Colocar el lomo en la plancha y cocinar. Esperar a que este listo y darlo vuelta. Seguir cocinando")
 			.build
 
-	new RecetaBuilder()
-			.tipoDeReceta(new Privada(usuario))
-			.nombreDelPlato("Hummus de garbanzo")
-			.agregarIngrediente(garbanzos)
-			.agregarIngrediente(limon)
-			.agregarIngrediente(ajo)
-			.setearCalorias(600)
-			.setearPreparacion("No tengo ni ganas de hacer una descripcion sobre el hummus de garbanzo porque debe ser horrible")
-			.build
 	}
 	
 	

@@ -8,7 +8,7 @@ import org.uqbar.commons.model.UserException
 class RepoDeUsuariosMock {
 	static RepoDeUsuariosMock repositorio = null
 
-	List<Usuario> todosLosUsuarios = newArrayList
+	public List<Usuario> todosLosUsuarios = newArrayList
 	Map<Usuario, String> usuarioContrasenia = new HashMap<Usuario, String>
 	
 	public new() {
