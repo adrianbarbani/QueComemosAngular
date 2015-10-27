@@ -1,12 +1,12 @@
 package ar.algo.adriba.tp1
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import java.util.ArrayList
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.uqbar.commons.utils.Observable
 import org.uqbar.commons.model.Entity
 
-@Observable
+
 @Accessors
 public class Receta extends Entity implements Cosas  {
 

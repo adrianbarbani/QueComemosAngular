@@ -7,6 +7,7 @@ import org.uqbar.xtrest.api.annotation.Controller
 import org.uqbar.xtrest.api.annotation.Get
 import org.uqbar.xtrest.http.ContentType
 import org.uqbar.xtrest.json.JSONUtils
+import ar.algo.adriba.appModel.RecetasObjectSet
 
 @Controller
 class RecetasController {
@@ -15,9 +16,13 @@ class RecetasController {
 	def static void main(String[] args) {
 		XTRest.start(RecetasController, 9000)
 	}
-
+	 
+	
 	@Get("/recetas")
 	def Result Recetas() {
+		val usuario = RecetasObjectSet.INSTANCE.crearUsuario
+		RecetasObjectSet.INSTANCE.crearRecetas(usuario) 
+	
 		val recetas = RepositorioRecetas.instance.todasLasRecetas
 		response.contentType = ContentType.APPLICATION_JSON
 		ok(recetas.toJson)
