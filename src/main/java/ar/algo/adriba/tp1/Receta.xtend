@@ -6,7 +6,7 @@ import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.Entity
 
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Accessors
 public class Receta extends Entity implements Cosas  {
 

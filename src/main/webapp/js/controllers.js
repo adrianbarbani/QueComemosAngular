@@ -1,40 +1,35 @@
 "use strict";
-recetasListApp.controller('ListarRecetasController', function (recetasService) {
+recetasListApp.controller('ListarRecetasController', function(recetasService) {
 
-  var self = this;
-  this.recetas = [];
+	var self = this;
+	this.recetas = [];
 
-  this.getRecetas = function() {
-      recetasService.findAll(function(data) {
-        self.recetas = data;
-      });
-  } 
+	this.getRecetas = function() {
+		recetasService.findAll(function(data) {
+			self.recetas = data;
+		});
+	}
 
-  this.getRecetas();
-  
+	this.getRecetas();
 
- 
- 
-  /*this.recetas = RecetasService.recetas;
-  RecetasService.listarRecetas();*/
-   
-  
+	/*
+	 * this.recetas = RecetasService.recetas; RecetasService.listarRecetas();
+	 */
 
 });
 
+recetasListApp.controller('ShowRecetaController', function($stateParams,
+		$state, recetasService) {
 
-recetasListApp.controller('ShowRecetaController', function ($stateParams, $state, recetasService) {
+	this.receta = recetasService.getRecetaByNombre($stateParams.id);
 
-  this.receta = recetasService.getRecetaByNombre($stateParams.id);
+	if (!this.receta) {
+		$state.go("listarReceta");
+		return;
+	}
 
-  if (!this.receta) {
-    $state.go("listarReceta");
-    return;
-  }
-
-
-  this.volver = function () {
-    $state.go("listarReceta");
-  };
+	this.volver = function() {
+		$state.go("listarReceta");
+	};
 
 });

@@ -2,6 +2,8 @@ package ar.algo.adriba.recetas.controller
 
 import ar.algo.adriba.appModel.RecetasObjectSet
 import ar.algo.adriba.appModel.UltimasConsultasAppModel
+import ar.algo.adriba.tp1.Receta
+import java.util.List
 import org.uqbar.xtrest.api.Result
 import org.uqbar.xtrest.api.XTRest
 import org.uqbar.xtrest.api.annotation.Controller
@@ -26,10 +28,10 @@ class RecetasController {
 		val appModel= new UltimasConsultasAppModel(usuario)
 		appModel.initSearch()	
 	
-		var recetas = appModel.resultados 
+		var List<Receta> recetas = appModel.resultados 
 		
 //		UsuariosObjectSet.INSTANCE.crearUsuarios
-//		var recetas = RepoDeUsuariosMock.getInstance.todosLosUsuarios
+//		var List<Usuario> recetas = RepoDeUsuariosMock.getInstance.todosLosUsuarios1
 
 		
 		response.contentType = ContentType.APPLICATION_JSON
