@@ -6,7 +6,7 @@ recetasListApp.controller('ListarRecetasController', function(recetasService) {
 
 	this.getRecetas = function() {
 		recetasService.findAll(function(data) {
-			self.recetas = data;
+			self.recetas = data.data;
 		});
 	}
 
