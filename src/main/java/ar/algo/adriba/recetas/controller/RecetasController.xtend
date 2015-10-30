@@ -1,39 +1,53 @@
 package ar.algo.adriba.recetas.controller
 
+import ar.algo.adriba.appModel.LoginAppModel
 import ar.algo.adriba.appModel.RecetasObjectSet
 import ar.algo.adriba.appModel.UltimasConsultasAppModel
 import ar.algo.adriba.tp1.Receta
 import java.util.List
 import org.uqbar.xtrest.api.Result
 import org.uqbar.xtrest.api.XTRest
+import org.uqbar.xtrest.api.annotation.Body
 import org.uqbar.xtrest.api.annotation.Controller
 import org.uqbar.xtrest.api.annotation.Get
+import org.uqbar.xtrest.api.annotation.Post
 import org.uqbar.xtrest.http.ContentType
 import org.uqbar.xtrest.json.JSONUtils
+import ar.algo.adriba.tp1.Usuario
 
 @Controller
 class RecetasController {
+	
+	Usuario usr
+	
 	extension JSONUtils = new JSONUtils
 
 	def static void main(String[] args) {
 		XTRest.start(RecetasController, 9000)
 	}
-	 //a
+
+	
+		
+	@Post("/login")
+	def Result login(@Body String body){
+		val LoginAppModel login = body.fromJson(LoginAppModel)
+		
+		login.autorizarLogin
+		usr = login.usuarioLogin
+		
+		response.contentType = ContentType.TEXT_PLAIN
+		ok() 
+	}
 	
 	@Get("/recetas")
 	def Result Recetas() {
-		val usuario = RecetasObjectSet.INSTANCE.crearUsuario
-		RecetasObjectSet.INSTANCE.crearRecetas(usuario) 
+		RecetasObjectSet.INSTANCE.crearRecetas(usr) 
 		
-		val appModel= new UltimasConsultasAppModel(usuario)
+		val appModel= new UltimasConsultasAppModel(usr)
 		appModel.initSearch()	
 	
 		var List<Receta> recetas = appModel.resultados 
-		
-//		UsuariosObjectSet.INSTANCE.crearUsuarios
-//		var List<Usuario> recetas = RepoDeUsuariosMock.getInstance.todosLosUsuarios1
-
-		
+			
 		response.contentType = ContentType.APPLICATION_JSON
 		ok(recetas.toJson)
 	}

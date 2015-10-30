@@ -1,10 +1,32 @@
-recetasListApp.service("recetasService", function ($http) {
-
+recetasListApp.service("RecetasService", function ($http) {
 
   this.findAll = function(callback) {
         $http.get('/recetas').then(callback);
-    }
+    };
+
+});
+
+recetasListApp.service('UsuariosService', function($http) {
+
+	this.loguear = function(loginData, callback) {
+		$http.post('/login/', loginData).then(callback);
+	};
+
+});
+
+recetasListApp.service('SessionService', function() {
+
+	var usuarioLogueado;
+	var self = this;
+
+	this.loguearUsuario = function(usuario) {
+		self.usuarioLogueado = usuario;		
+	};
+});
   
+
+  
+
   /*
   this.recetas = [];
 
@@ -26,4 +48,3 @@ recetasListApp.service("recetasService", function ($http) {
   };*/
   
 
-});

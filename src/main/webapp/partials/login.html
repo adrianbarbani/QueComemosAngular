@@ -1,0 +1,24 @@
+<div style="width: 30%; padding: 15pt;">
+	<div class="panel-heading">
+
+		<!-- <g:if test="${flash.message}">
+			<div class="alert alert-danger" role="alert">
+				<span class="glyphicon glyphicon-exclamation-sign"
+					aria-hidden="true"></span> <span class="sr-only">Error:</span>
+				<div class="message">${flash.message}</div>
+			</div>
+		</g:if> -->
+		
+ 
+		<form>	
+			Usuario: <input type="text" name="nombreUsuarioABuscar" class="form-control" ng-model="loginCtrl.nombreUsuarioABuscar"
+			 			placeholder="Ingrese su usuario" ><br>
+		    Contrasenia:<input type="password" name="contrasenia" class="form-control" ng-model="loginCtrl.contrasenia"
+										placeholder="Ingrese su clave" ><br>
+			
+			<button class="btn btn-primary" value="Ingresar" data-ng-click="loginCtrl.ingresar()">Ingresar</button>
+		
+		</form>
+		
+	</div>
+</div>

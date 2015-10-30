@@ -1,11 +1,11 @@
 "use strict";
-recetasListApp.controller('ListarRecetasController', function(recetasService) {
+recetasListApp.controller('ListarRecetasController', function(RecetasService) {
 
 	var self = this;
 	this.recetas = [];
 
 	this.getRecetas = function() {
-		recetasService.findAll(function(data) {
+		RecetasService.findAll(function(data) {
 			self.recetas = data.data;
 		});
 	}
@@ -19,9 +19,9 @@ recetasListApp.controller('ListarRecetasController', function(recetasService) {
 });
 
 recetasListApp.controller('ShowRecetaController', function($stateParams,
-		$state, recetasService) {
+		$state, RecetasService) {
 
-	this.receta = recetasService.getRecetaByNombre($stateParams.id);
+	this.receta = RecetasService.getRecetaByNombre($stateParams.id);
 
 	if (!this.receta) {
 		$state.go("listarReceta");
@@ -32,4 +32,28 @@ recetasListApp.controller('ShowRecetaController', function($stateParams,
 		$state.go("listarReceta");
 	};
 
+});
+
+recetasListApp.controller('LoginController', function($stateParams, $state,
+		UsuariosService, RecetasService, SessionService) {
+
+	var self = this;
+
+	this.ingresar = function() {
+		UsuariosService.loguear({
+			"nombreUsuarioABuscar" : self.nombreUsuarioABuscar,
+			"contrasenia" : self.contrasenia
+		}, this.listarRecetas);
+
+	};
+
+	this.listarRecetas = function(data) {
+
+		SessionService.loguearUsuario(data.data);
+
+		RecetasService.findAll(function() {
+			$state.go("listaRecetas");
+		});
+
+	}
 });
