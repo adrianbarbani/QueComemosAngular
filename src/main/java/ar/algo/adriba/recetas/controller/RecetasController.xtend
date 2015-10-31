@@ -15,6 +15,7 @@ import org.uqbar.xtrest.api.annotation.Get
 import org.uqbar.xtrest.api.annotation.Post
 import org.uqbar.xtrest.http.ContentType
 import org.uqbar.xtrest.json.JSONUtils
+import ar.algo.adriba.appModel.DetalleDeRecetaAppModel
 
 @Controller
 class RecetasController {
@@ -57,5 +58,22 @@ class RecetasController {
 
 		response.contentType = ContentType.APPLICATION_JSON
 		ok(recetas.toJson)
+	}
+	
+	@Get("/receta/:id")
+	def Result receta(@Body String body) {
+		
+		//hay que hacerlo esto en un metodo
+		RecetasObjectSet.INSTANCE.crearRecetas(usr)
+		val appModel = new UltimasConsultasAppModel(usr)
+		appModel.initSearch()
+		var List<Receta> recetas = appModel.resultados
+		//despues hay que pasar todo esto a un metodo
+		
+		
+		var Receta receta = recetas.findFirst[receta|receta.nombreDelPlato.matches(id)]
+			
+		response.contentType = ContentType.APPLICATION_JSON
+		ok(receta.toJson)
 	}
 }

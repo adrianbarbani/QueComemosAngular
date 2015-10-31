@@ -1,3 +1,4 @@
+<body data-ng-controller="ShowRecetaController as showCtrl">
 <div>
 
 	<div class="panel panel-default">
@@ -8,10 +9,10 @@
 
 			<div class="center-block" style="border-style: solid; width: 95%">
 				<div class="center-block" style="width: 98%">
-					<h4 id="sizing-addon2">{{showCtrl.receta.nombre}}</h4>
+					<h4 id="sizing-addon2">{{showCtrl.receta.nombreDelPlato}}</h4>
 					<ul class="list-inline">
-						<li>{{showCtrl.receta.calorias}} calorias</li>
-						<li>{{showCtrl.receta.tipo}}</li>
+						<li>{{showCtrl.receta.caloriasReceta}} calorias</li>
+						<li>{{showCtrl.receta.tipo.defi}}</li>
 					</ul>
 				</div>
 			</div>
@@ -47,7 +48,7 @@
 										<td>{{ingrediente.cantidad}}</td>
 										<td>{{ingrediente.nombre}}</td>
 									</tr>
-									</g:each>
+									
 								</tbody>
 							</table>
 						</td>
@@ -65,7 +66,7 @@
 						<td><strong>Condiciones Preexistentes</strong>
 							<div class="center-block"
 								style="border-style: solid; width: 90%; height: 100%">
-								<p ng-repeat="condiciones in showCtrl.receta.condiciones">
+								<p ng-repeat="condiciones in showCtrl.receta.condicionesPreexistentes">
 									{{condiciones}}</p>
 							</div></td>
 					</tr>
@@ -80,7 +81,7 @@
 		<div class="center-block"
 			style="border-style: solid; width: 90%; background-color: #CDCDCD">
 
-			<p class="text-center">{{showCtrl.receta.descripcion}}</p>
+			<p class="text-center">{{showCtrl.receta.explicacionDeLaPreparacion}}</p>
 
 		</div>
 
@@ -101,3 +102,4 @@
 </div>
 
 </div>
+</body>

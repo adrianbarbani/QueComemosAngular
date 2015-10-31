@@ -16,7 +16,7 @@ public class Receta extends Entity implements Cosas  {
 	int caloriasReceta
 	String dificultad
 	String temporada
-	TipoReceta tipo 
+	TipoReceta tipo = new Publica
 
 	
 	

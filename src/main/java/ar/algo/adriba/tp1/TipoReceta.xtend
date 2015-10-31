@@ -2,7 +2,7 @@ package ar.algo.adriba.tp1
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIgnoreProperties(ignoreUnknown=true)
 interface TipoReceta {
 	def boolean sePuedeSugerir()
 

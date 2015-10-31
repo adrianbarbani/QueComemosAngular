@@ -8,6 +8,7 @@ class Privada implements TipoReceta {
 
 	Usuario duenio 
 	String nombre
+	String defi = new String("Privada")
 	
 	new(Usuario unUsuario, Receta unaReceta) {
 		duenio = unUsuario

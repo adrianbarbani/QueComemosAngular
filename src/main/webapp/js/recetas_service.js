@@ -5,7 +5,7 @@ recetasListApp.service("RecetasService", function ($http) {
     }
     
     this.getRecetaByNombre = function(id, callback) {
-		$http.get('/receta/' + id, SessionService.usuarioLogueado).then(callback)
+		$http.get('/receta/' + id).then(callback)
 	}
 
 });

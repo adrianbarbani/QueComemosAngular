@@ -6,6 +6,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 class Publica implements TipoReceta {
 
 	//Receta recetaAModificar
+	String defi = new String("Publica")
 	
 	
 	override sePuedeSugerir() {
