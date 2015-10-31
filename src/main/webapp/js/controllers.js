@@ -33,14 +33,6 @@ recetasListApp.controller('ShowRecetaController', function($stateParams,
 	};
 
 	this.mostrar();
-
-	// this.receta = RecetasService.getRecetaByNombre($stateParams.id);
-
-	// if (!this.receta) {
-	// $state.go("listarReceta");
-	// return;
-	// }
-	
 	
 	this.volver = function() {
 		$state.go("listarReceta");

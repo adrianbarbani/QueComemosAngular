@@ -46,7 +46,8 @@ class RecetasObjectSet {
 			.setearCalorias(150)
 			.setearDificultad("Dificil")
 			.setearPreparacion("Pasar la carne por huevo, harina y pan rallado. Freir con el aceite por 10 minutos")
-		.build
+			.setearNumeroId("1")
+			.build
 		
 	new RecetaBuilder()
 			.tipoDeReceta(new Publica)
@@ -61,6 +62,7 @@ class RecetasObjectSet {
 			.setearTemporadas("Todo el año")
 			.setearDificultad("Dificil")
 			.setearPreparacion("Pasar la carne por huevo, harina y pan rallado. Freir con el aceite por 10 minutos. Luego colocarle la salsa de tomate, el queso y  calentar")
+			.setearNumeroId("2")
 			.build
 
 	new RecetaBuilder()
@@ -72,6 +74,7 @@ class RecetasObjectSet {
 			.setearTemporadas("Invierno")
 			.setearDificultad("Dificil")
 			.setearPreparacion("")
+			.setearNumeroId("3")
 			.build
 
 	new RecetaBuilder()
@@ -85,6 +88,7 @@ class RecetasObjectSet {
 			.setearDificultad("Facil")
 			.setearCalorias(500)
 			.setearPreparacion("Cocinar la prepizza en el horno. Agregar el queso y volver a cocinar. Agregar oregano a gusto")
+			.setearNumeroId("4")			
 			.build
 
 	new RecetaBuilder()
@@ -99,8 +103,24 @@ class RecetasObjectSet {
 			.setearCalorias(560)
 			.setearDificultad("Dificil")
 			.setearPreparacion("Cocinar la prepizza en el horno. Agregar el queso y volver a cocinar. Agregar la salsa blanca y la verdura")
+			.setearNumeroId("5")
 			.build
 
+	new RecetaBuilder()
+			.tipoDeReceta(new Publica)
+			.nombreDelPlato("asd")
+			.agregarIngrediente(prepizza)
+			.agregarIngrediente(salsaDeTomate)
+			.agregarIngrediente(queso)
+			.agregarIngrediente(salsaBlanca)
+			.agregarIngrediente(verdura)
+			.setearTemporadas("Todo el año")
+			.setearCalorias(560)
+			.setearDificultad("Dificil")
+			.setearPreparacion("Cocinar la prepizza en el horno. Agregar el queso y volver a cocinar. Agregar la salsa blanca y la verdura")
+			.setearNumeroId("6")
+			.build
+			
 	new RecetaBuilder()
 			.tipoDeReceta(new Publica)
 			.nombreDelPlato("Lomo a la Plancha")
@@ -109,6 +129,7 @@ class RecetasObjectSet {
 			.setearTemporadas("Otoño")
 			.setearDificultad("Media")
 			.setearPreparacion("Colocar el lomo en la plancha y cocinar. Esperar a que este listo y darlo vuelta. Seguir cocinando")
+			.setearNumeroId("7")
 			.build
 
 	}

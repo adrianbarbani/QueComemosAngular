@@ -49,6 +49,11 @@ class RecetaBuilder {
 		
 	}
 	
+	def RecetaBuilder setearNumeroId (String id){
+		receta.numeroId = id
+		this
+	}
+	
 	def Receta build(){
 		RepositorioRecetas.getInstance().agregar(receta)
 		receta.setearTipo

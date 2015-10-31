@@ -104,6 +104,16 @@ class Busqueda {
 		receta.get(0)
 	}
 	
+	def Receta buscarPorId(String id){
+		var receta = this.listaPorId(id)
+		receta.get(0)	
+	}
+	
+	def listaPorId(String id){
+		pasarPorFiltros(this.recetasQuePuedeVer.filter[receta|
+			this.match(id, receta.numeroId)].toList)
+	}
+	
 	def buscarReceta(String nombre, String dificultad, String temporada, String ingrediente, int caloriaDesde, int caloriaHasta) {
 		pasarPorFiltros(this.recetasQuePuedeVer.filter[receta|
 			this.match(nombre, receta.nombre) && this.match(dificultad, receta.dificultad) && this.match(temporada, receta.temporada) && this.contiene(ingrediente,receta) && 
