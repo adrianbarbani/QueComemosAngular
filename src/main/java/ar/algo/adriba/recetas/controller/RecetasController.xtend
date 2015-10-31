@@ -1,5 +1,6 @@
 package ar.algo.adriba.recetas.controller
 
+import ar.algo.adriba.appModel.DetalleDeRecetaAppModel
 import ar.algo.adriba.appModel.LoginAppModel
 import ar.algo.adriba.appModel.RecetasObjectSet
 import ar.algo.adriba.appModel.UltimasConsultasAppModel
@@ -15,7 +16,6 @@ import org.uqbar.xtrest.api.annotation.Get
 import org.uqbar.xtrest.api.annotation.Post
 import org.uqbar.xtrest.http.ContentType
 import org.uqbar.xtrest.json.JSONUtils
-import ar.algo.adriba.appModel.DetalleDeRecetaAppModel
 
 @Controller
 class RecetasController {
@@ -46,30 +46,32 @@ class RecetasController {
 		}
 
 	}
+	
+	
+	def listarLasRecetas() {
+		val appModel = new UltimasConsultasAppModel(usr)
+		appModel.initSearch()
+		
+		var List<Receta> recetas = appModel.resultados
+		recetas
+	}
 
 	@Get("/recetas")
 	def Result Recetas() {
 		RecetasObjectSet.INSTANCE.crearRecetas(usr)
 
-		val appModel = new UltimasConsultasAppModel(usr)
-		appModel.initSearch()
-
-		var List<Receta> recetas = appModel.resultados
+		var recetas = listarLasRecetas()
 
 		response.contentType = ContentType.APPLICATION_JSON
 		ok(recetas.toJson)
 	}
 	
+	
 	@Get("/receta/:id")
 	def Result receta(@Body String body) {
 		
-		//hay que hacerlo esto en un metodo
-		RecetasObjectSet.INSTANCE.crearRecetas(usr)
-		val appModel = new UltimasConsultasAppModel(usr)
-		appModel.initSearch()
-		var List<Receta> recetas = appModel.resultados
-		//despues hay que pasar todo esto a un metodo
 		
+		var recetas = listarLasRecetas()		
 		
 		var Receta receta = recetas.findFirst[receta|receta.nombreDelPlato.matches(id)]
 			

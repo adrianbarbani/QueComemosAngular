@@ -42,6 +42,7 @@ class RecetasObjectSet {
 			.setearTemporadas("Todo el año")
 			.agregarIngrediente(panRallado)
 			.agregarIngrediente(carne)
+			.agregarIngrediente(oregano)
 			.setearCalorias(150)
 			.setearDificultad("Dificil")
 			.setearPreparacion("Pasar la carne por huevo, harina y pan rallado. Freir con el aceite por 10 minutos")
@@ -49,7 +50,7 @@ class RecetasObjectSet {
 		
 	new RecetaBuilder()
 			.tipoDeReceta(new Publica)
-			.nombreDelPlato("Milanesa napolitana")
+			.nombreDelPlato("Milanesa Napolitana")
 			.agregarIngrediente(harina)
 			.agregarIngrediente(huevo)
 			.agregarIngrediente(panRallado)
@@ -75,7 +76,7 @@ class RecetasObjectSet {
 
 	new RecetaBuilder()
 			.tipoDeReceta(new Publica)
-			.nombreDelPlato("Pizza de muzzarella")
+			.nombreDelPlato("Pizza de Muzzarella")
 			.agregarIngrediente(prepizza)
 			.agregarIngrediente(salsaDeTomate)
 			.agregarIngrediente(oregano)
@@ -88,7 +89,7 @@ class RecetasObjectSet {
 
 	new RecetaBuilder()
 			.tipoDeReceta(new Publica)
-			.nombreDelPlato("Pizza de verdura y salsa blanca")
+			.nombreDelPlato("Pizza de Verdura y Salsa Blanca")
 			.agregarIngrediente(prepizza)
 			.agregarIngrediente(salsaDeTomate)
 			.agregarIngrediente(queso)

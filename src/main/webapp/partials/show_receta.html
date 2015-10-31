@@ -56,7 +56,7 @@
 							<div class="center-block"
 								style="border-style: solid; width: 90%; height: 100%">
 								<p ng-repeat="condimentos in showCtrl.receta.condimentos">
-									{{condimentos}}</p>
+									{{condimentos.nombre}}</p>
 							</div>
 						</td>
 					</tr>
@@ -66,8 +66,8 @@
 						<td><strong>Condiciones Preexistentes</strong>
 							<div class="center-block"
 								style="border-style: solid; width: 90%; height: 100%">
-								<p ng-repeat="condiciones in showCtrl.receta.condicionesPreexistentes">
-									{{condiciones}}</p>
+								<p ng-repeat="condiciones in showCtrl.receta.paraQueCondicionesSoyInadecuada">
+									{{condiciones.nombre}}</p>
 							</div></td>
 					</tr>
 
