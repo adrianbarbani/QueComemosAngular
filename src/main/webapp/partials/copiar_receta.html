@@ -1,0 +1,29 @@
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="layout" content="main" />
+
+
+</head>
+<body style="font-family: Calibri, Verdana; ">
+	<form method="POST">
+	<div style="width: 18%; padding: 15pt;">
+	<div class="panel-heading">
+	
+	<body data-ng-controller="CopiarRecetaController as copiarCtrl">
+	
+	Receta:<p><strong>{{copiarCtrl.receta.nombreDelPlato}}</strong></p>
+	
+	Nombre de la copia: <input type="text" name="nombreDeCopia" class="form-control" ng-model="copiarCtrl.nombreDeCopia"
+			 			placeholder="Ingrese Nombre" >
+
+								
+			<button ng-click="copiarCtrl.copiar()" class="btn btn-primary">Copiar<button>
+
+
+			</div>
+		</div>
+	</form>
+</body>
+</html>

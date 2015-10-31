@@ -24,7 +24,7 @@ recetasListApp.controller('ShowRecetaController', function($stateParams,
 
 	var self = this;
 	var receta;
-	
+		
 	this.mostrar = function() {
 		RecetasService.getRecetaByNombre($stateParams.id, function(data) {
 			self.receta = data.data;
@@ -40,11 +40,25 @@ recetasListApp.controller('ShowRecetaController', function($stateParams,
 	// $state.go("listarReceta");
 	// return;
 	// }
-
+	
+	
 	this.volver = function() {
 		$state.go("listarReceta");
 	};
 
+});
+
+recetasListApp.controller('CopiarRecetaController', function($stateParams, $state,
+		$timeout, UsuariosService, RecetasService, SessionService) {
+	
+	var self = this;
+	var receta;
+	
+	this.copiar = function(){
+		RecetasService.copiarReceta({
+			"nombreDeCopia" : self.nombreDeCopia})};
+	
+	
 });
 
 recetasListApp.controller('LoginController', function($stateParams, $state,

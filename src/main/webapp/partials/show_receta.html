@@ -93,8 +93,9 @@
 					<!-- <button type="button" class="btn btn-default" data-dismiss="modal">Volver</button>
         <button type="button" class="btn btn-primary">Copiar Receta</button> -->
 
-					<g:link controller="login" action="copiarLaReceta"
-						class="btn btn-primary" id="${Receta.unaReceta.nombreDelPlato}">Copiar</g:link>
+					<button class="btn btn-primary" value="Copiar" data-ng-click="">Copiar</button>
+					
+					<a ui-sref="copiarReceta({id: showCtrl.receta.nombreDelPlato})">Copiar</a>
 		</div>
 	</div>
 	<!-- /.modal-content -->

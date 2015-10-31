@@ -21,6 +21,12 @@ recetasListApp.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: "partials/show_receta.html",
       controller: "ShowRecetaController as showCtrl"
     })
+    
+    .state('copiarReceta', {
+      url: "/copiarReceta/:id",
+      templateUrl: "partials/copiar_receta.html",
+      controller: "CopiarRecetaController as copiarCtrl"
+    })
   
 
 });

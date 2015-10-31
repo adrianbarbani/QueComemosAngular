@@ -17,6 +17,7 @@ import org.uqbar.xtrest.api.annotation.Get
 import org.uqbar.xtrest.api.annotation.Post
 import org.uqbar.xtrest.http.ContentType
 import org.uqbar.xtrest.json.JSONUtils
+import ar.algo.adriba.appModel.CopiarRecetaAppModel
 
 @Controller
 class RecetasController {
@@ -47,15 +48,6 @@ class RecetasController {
 		}
 
 	}
-	
-	
-	def listarLasRecetas() {
-		val appModel = new UltimasConsultasAppModel(usr)
-		appModel.initSearch()
-		
-		var List<Receta> recetas = appModel.resultados
-		recetas
-	}
 
 	@Get("/recetas")
 	def Result Recetas() {
@@ -78,5 +70,27 @@ class RecetasController {
 			
 		response.contentType = ContentType.APPLICATION_JSON
 		ok(receta.toJson)
+	}
+	
+	@Post("/copiarReceta/:id")
+	def Result receta(@Body String body) {
+		
+		var Busqueda busqueda = new Busqueda(usr)
+		var copiaReceta = new CopiarRecetaAppModel(busqueda.buscarRecetaPorNombre(body),usr)
+		
+		copiaReceta.nombreDeCopia = ????????
+		copiaReceta.copiarReceta()	
+		
+		response.contentType = ContentType.TEXT_PLAIN
+		ok(?????.toJson)
+	}
+	
+	//------------------------------------------------------------------
+	def listarLasRecetas() {
+		val appModel = new UltimasConsultasAppModel(usr)
+		appModel.initSearch()
+		
+		var List<Receta> recetas = appModel.resultados
+		recetas
 	}
 }
