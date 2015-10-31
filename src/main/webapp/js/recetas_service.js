@@ -12,8 +12,8 @@ recetasListApp.service("RecetasService", function ($http) {
 
 recetasListApp.service('UsuariosService', function($http) {
 
-	this.loguear = function(loginData, callback) {
-		$http.post('/login/', loginData).then(callback);
+	this.loguear = function(loginData, callback, errorHandler) {
+		$http.post('/login/', loginData).then(callback, errorHandler);
 	};
 
 });

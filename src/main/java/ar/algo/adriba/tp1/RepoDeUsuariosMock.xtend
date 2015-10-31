@@ -30,14 +30,14 @@ class RepoDeUsuariosMock {
 	def Usuario compararContraseña(String usr, String contraseniaIngresada){
 		val Usuario usuario = this.obtenerUsuario(usr)
 		if(!usuarioContrasenia.get(usuario).equals(contraseniaIngresada))
-		throw new UserException("Contraseña incorrecta")else{usuario}	
+		throw new RuntimeException("Contraseña incorrecta")else{usuario}	
 	} 
 	
 	
 	def  obtenerUsuario(String nombre){
 		val Usuario usuario = todosLosUsuarios.findFirst[usr|usr.esTuNombre(nombre)]
 		if (usuario==null){
-			throw new UserException ("Ingrese un usuario existente")
+			throw new RuntimeException ("Ingrese un usuario existente")
 		}else{usuario}
 	}
 	

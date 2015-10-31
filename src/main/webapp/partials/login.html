@@ -9,7 +9,7 @@
 			</div>
 		</g:if> -->
 		
- 
+ 		<div class="alert alert-danger animate-repeat" ng-repeat="error in loginCtrl.errors">{{error}}</div>
 		<form>	
 			Usuario: <input type="text" name="nombreUsuarioABuscar" class="form-control" ng-model="loginCtrl.nombreUsuarioABuscar"
 			 			placeholder="Ingrese su usuario" ><br>

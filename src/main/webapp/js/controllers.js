@@ -23,22 +23,21 @@ recetasListApp.controller('ShowRecetaController', function($stateParams,
 
 	var receta;
 	var self = this;
-	
-	this.mostrar = function() {
-		RecetasService.getRecetaByNombre($stateParams.id, function(data){
-		self.receta = data.data;
-	})
-	};
-	
-	this.mostrar();
-	
-	
-	//this.receta = RecetasService.getRecetaByNombre($stateParams.id);
 
-//	if (!this.receta) {
-//		$state.go("listarReceta");
-//		return;
-//	}
+	this.mostrar = function() {
+		RecetasService.getRecetaByNombre($stateParams.id, function(data) {
+			self.receta = data.data;
+		})
+	};
+
+	this.mostrar();
+
+	// this.receta = RecetasService.getRecetaByNombre($stateParams.id);
+
+	// if (!this.receta) {
+	// $state.go("listarReceta");
+	// return;
+	// }
 
 	this.volver = function() {
 		$state.go("listarReceta");
@@ -47,25 +46,32 @@ recetasListApp.controller('ShowRecetaController', function($stateParams,
 });
 
 recetasListApp.controller('LoginController', function($stateParams, $state,
-		UsuariosService, RecetasService, SessionService) {
+		$timeout, UsuariosService, RecetasService, SessionService) {
 
 	var self = this;
+	this.errors = [];
 
 	this.ingresar = function() {
 		UsuariosService.loguear({
 			"nombreUsuarioABuscar" : self.nombreUsuarioABuscar,
 			"contrasenia" : self.contrasenia
-		}, this.listarRecetas);
+		}, this.loguear, this.notificarError );
 
 	};
 
-	this.listarRecetas = function(data) {
-
+	//trae la
+	this.loguear = function(data) {
 		SessionService.loguearUsuario(data.data);
-
-		RecetasService.findAll(function() {
-			$state.go("listaRecetas");
-		});
-
+		$state.go("listarReceta");
+		
 	}
+
+	this.notificarError = function (mensaje) {
+		self.errors.push(mensaje.data);
+		$timeout(function() {
+			while (self.errors.length > 0)
+				self.errors.pop();
+		}, 3000);
+	}
+	;
 });
