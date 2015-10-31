@@ -21,12 +21,24 @@ recetasListApp.controller('ListarRecetasController', function(RecetasService) {
 recetasListApp.controller('ShowRecetaController', function($stateParams,
 		$state, RecetasService) {
 
-	this.receta = RecetasService.getRecetaByNombre($stateParams.id);
+	var receta;
+	var self = this;
+	
+	this.mostrar = function() {
+		RecetasService.getRecetaByNombre($stateParams.id, function(data){
+		self.receta = data.data;
+	})
+	};
+	
+	this.mostrar();
+	
+	
+	//this.receta = RecetasService.getRecetaByNombre($stateParams.id);
 
-	if (!this.receta) {
-		$state.go("listarReceta");
-		return;
-	}
+//	if (!this.receta) {
+//		$state.go("listarReceta");
+//		return;
+//	}
 
 	this.volver = function() {
 		$state.go("listarReceta");

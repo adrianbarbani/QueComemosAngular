@@ -2,7 +2,11 @@ recetasListApp.service("RecetasService", function ($http) {
 
   this.findAll = function(callback) {
         $http.get('/recetas').then(callback);
-    };
+    }
+    
+    this.getRecetaByNombre = function(id, callback) {
+		$http.get('/receta/' + id, SessionService.usuarioLogueado).then(callback)
+	}
 
 });
 
