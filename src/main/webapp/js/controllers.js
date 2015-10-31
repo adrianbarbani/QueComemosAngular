@@ -78,7 +78,7 @@ recetasListApp.controller('CopiarRecetaController', function($stateParams,
 		$state, $timeout, RecetasService) {
 
 	var self = this;
-	var receta;
+	var receta=$stateParams.id
 
 
 	this.obtenerReceta = function() {
