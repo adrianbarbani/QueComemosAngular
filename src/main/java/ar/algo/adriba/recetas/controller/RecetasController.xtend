@@ -28,7 +28,7 @@ class RecetasController {
 
 	extension JSONUtils = new JSONUtils
 	extension JSONPropertyUtils = new JSONPropertyUtils
-	
+
 	def static void main(String[] args) {
 		XTRest.start(RecetasController, 9000)
 	}
@@ -39,13 +39,13 @@ class RecetasController {
 		UsuariosObjectSet.INSTANCE.crearUsuarios
 
 		try {
-			
+
 			login.autorizarLogin
 			usr = login.usuarioLogin
 
 			response.contentType = ContentType.TEXT_PLAIN
 			ok(login.nombreUsuarioABuscar.toJson)
-			
+
 		} catch (Exception e) {
 			badRequest(e.message)
 		}
@@ -61,7 +61,7 @@ class RecetasController {
 		response.contentType = ContentType.APPLICATION_JSON
 		ok(recetas.toJson)
 	}
-	
+
 	@Get("/temporadas")
 	def Result temporadas() {
 		var temporadas = RepoDeTemporadas.getInstance.dameLasTemporadas()
@@ -69,7 +69,7 @@ class RecetasController {
 		response.contentType = ContentType.APPLICATION_JSON
 		ok(temporadas.toJson)
 	}
-	
+
 	@Get("/dificultades")
 	def Result dificultades() {
 		var dificultades = RepoDificultades.getInstance.getTodasLasDificultades()
@@ -77,60 +77,75 @@ class RecetasController {
 		response.contentType = ContentType.APPLICATION_JSON
 		ok(dificultades.toJson)
 	}
-	
-	
+
 	@Post("/receta/:id")
 	def Result getRecetaByNombre(@Body String body) {
-		
-		var Busqueda busqueda = new Busqueda(usr)
-		
-		var detalleReceta = new DetalleDeRecetaAppModel(busqueda.buscarPorId(body),usr)
-		var Receta receta = detalleReceta.unaReceta
-			
+
+		var Receta receta = getDetalleRecetaAppModel(body).unaReceta
+
 		response.contentType = ContentType.APPLICATION_JSON
 		ok(receta.toJson)
 	}
-	
-	
-	
- 	 @Post("/copiar/")
-	def Result receta(@Body String body) {
-		
+
+	//devuelve el app de los detalles receta, ingresar el id de la receta a buscar
+	def getDetalleRecetaAppModel(String body) {
 		var Busqueda busqueda = new Busqueda(usr)
-		
+
+		var detalleReceta = new DetalleDeRecetaAppModel(busqueda.buscarPorId(body), usr)
+		detalleReceta
+	}
+
+	//hacer favorita
+	@Post("/favorita/")
+	def Result hacerFavorita(@Body String body) {
+		var ParceFavorita aux = body.fromJson(ParceFavorita)
+		var detalleApp = this.getDetalleRecetaAppModel(aux.numeroId)
+
+		detalleApp.setFavorita(aux.favorita) // ver esto por que no siempre es un true.
+
+		response.contentType = ContentType.TEXT_PLAIN
+		ok('{ "status" : "OK" }')
+
+	}
+
+	@Post("/copiar/")
+	def Result receta(@Body String body) {
+
+		var Busqueda busqueda = new Busqueda(usr)
+
 		var id = body.getPropertyValue("numeroId")
-		var String nombreDeCopia = body.getPropertyValue("nombreDeCopia") 
-		
-		var copiaReceta = new CopiarRecetaAppModel(busqueda.buscarPorId(id),usr,nombreDeCopia)
-		
-		
-		copiaReceta.copiarReceta()	
-		
+		var String nombreDeCopia = body.getPropertyValue("nombreDeCopia")
+
+		var copiaReceta = new CopiarRecetaAppModel(busqueda.buscarPorId(id), usr, nombreDeCopia)
+
+		copiaReceta.copiarReceta()
+
 		response.contentType = ContentType.TEXT_PLAIN
 		ok('{ "status" : "OK" }')
 	}
-	
+
 	@Post("/buscar/")
 	def Result buscar(@Body String body) {
 		var consultas = new UltimasConsultasAppModel(usr)
 		var ParceBusqueda aux = body.fromJson(ParceBusqueda)
-		
+
 		consultas.caloriasDesde = aux.caloriasDesde
 		consultas.caloriasHasta = aux.caloriasHasta
 		consultas.nombre = aux.nombreReceta
-		consultas.dificultadSeleccionada= aux.dificultad	
-		consultas.temporadaSeleccionada= aux.temporada
-		consultas.ingredienteABuscar= aux.ingrediente 
+		consultas.dificultadSeleccionada = aux.dificultad
+		consultas.temporadaSeleccionada = aux.temporada
+		consultas.ingredienteABuscar = aux.ingrediente
 		consultas.buscar()
-		
+
 		response.contentType = ContentType.APPLICATION_JSON
 		ok(consultas.resultados.toJson)
 	}
+
 	//------------------------------------------------------------------
 	def listarLasRecetas() {
 		val appModel = new UltimasConsultasAppModel(usr)
 		appModel.initSearch()
-		
+
 		var List<Receta> recetas = appModel.resultados
 		recetas
 	}

@@ -61,8 +61,10 @@
 						</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox"> Agregar Receta a mis
-							favoritas</td>
+						<td>
+    					<input type="checkbox" checklist-model="showCtrl.hacerFavorita" ng-model="showCtrl.value1"> 
+    					Agregar Receta a mis favoritas</td>
+    					<p>{{showCtrl.value1}}</p>
 						<td><strong>Condiciones Preexistentes</strong>
 							<div class="center-block"
 								style="border-style: solid; width: 90%; height: 100%">

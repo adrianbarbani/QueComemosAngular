@@ -32,6 +32,10 @@ recetasListApp.service('UsuariosService', function($http) {
 	this.loguear = function(loginData, callback, errorHandler) {
 		$http.post('/login/', loginData).then(callback, errorHandler);
 	};
+	
+	this.hacerFavorita = function(favoritaData){
+		$http.post('/favorita/', favoritaData)
+	};
 
 });
 

@@ -54,10 +54,11 @@ recetasListApp.controller('ListarRecetasController', function(RecetasService) {
 });
 
 recetasListApp.controller('ShowRecetaController', function($stateParams,
-		$state, RecetasService) {
+		$state, RecetasService, UsuariosService) {
 
 	var self = this;
 	var receta;
+	var value1;
 
 	this.mostrar = function() {
 		RecetasService.getRecetaByNombre($stateParams.id, function(data) {
@@ -66,6 +67,12 @@ recetasListApp.controller('ShowRecetaController', function($stateParams,
 
 	};
 
+	this.hacerFavorita = function(){
+		UsuariosService.hacerFavorita({
+		"favorita":self.value1,
+		"numeroId": self.receta.numeroId})
+	};
+	
 	this.mostrar();
 
 	this.volver = function() {
