@@ -99,6 +99,11 @@ class Busqueda {
 
 	}
 	
+	def Receta buscarRecetaPorNombre(String nombre){ // hacerlo bien esto es una prueva
+		var receta = this.buscarReceta(nombre, null, null, null, 0, 0)
+		receta.get(0)
+	}
+	
 	def buscarReceta(String nombre, String dificultad, String temporada, String ingrediente, int caloriaDesde, int caloriaHasta) {
 		pasarPorFiltros(this.recetasQuePuedeVer.filter[receta|
 			this.match(nombre, receta.nombre) && this.match(dificultad, receta.dificultad) && this.match(temporada, receta.temporada) && this.contiene(ingrediente,receta) && 

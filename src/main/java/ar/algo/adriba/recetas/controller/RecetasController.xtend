@@ -5,6 +5,7 @@ import ar.algo.adriba.appModel.LoginAppModel
 import ar.algo.adriba.appModel.RecetasObjectSet
 import ar.algo.adriba.appModel.UltimasConsultasAppModel
 import ar.algo.adriba.appModel.UsuariosObjectSet
+import ar.algo.adriba.tp1.Busqueda
 import ar.algo.adriba.tp1.Receta
 import ar.algo.adriba.tp1.Usuario
 import java.util.List
@@ -68,12 +69,12 @@ class RecetasController {
 	
 	
 	@Get("/receta/:id")
-	def Result receta(@Body String body) {
+	def Result getRecetaByNombre(@Body String body) {
 		
 		
-		var recetas = listarLasRecetas()		
-		
-		var Receta receta = recetas.findFirst[receta|receta.nombreDelPlato.matches(id)]
+		var Busqueda busqueda = new Busqueda(usr)
+		var detalleReceta = new DetalleDeRecetaAppModel(busqueda.buscarRecetaPorNombre(body),usr)
+		var Receta receta = detalleReceta.unaReceta
 			
 		response.contentType = ContentType.APPLICATION_JSON
 		ok(receta.toJson)

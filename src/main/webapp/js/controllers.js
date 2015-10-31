@@ -4,6 +4,7 @@ recetasListApp.controller('ListarRecetasController', function(RecetasService) {
 	var self = this;
 	this.recetas = [];
 
+	//trae las recetas
 	this.getRecetas = function() {
 		RecetasService.findAll(function(data) {
 			self.recetas = data.data;
@@ -21,13 +22,14 @@ recetasListApp.controller('ListarRecetasController', function(RecetasService) {
 recetasListApp.controller('ShowRecetaController', function($stateParams,
 		$state, RecetasService) {
 
-	var receta;
 	var self = this;
-
+	var receta;
+	
 	this.mostrar = function() {
 		RecetasService.getRecetaByNombre($stateParams.id, function(data) {
 			self.receta = data.data;
 		})
+		
 	};
 
 	this.mostrar();
@@ -59,7 +61,7 @@ recetasListApp.controller('LoginController', function($stateParams, $state,
 
 	};
 
-	//trae la
+	//guarda el usr
 	this.loguear = function(data) {
 		SessionService.loguearUsuario(data.data);
 		$state.go("listarReceta");
