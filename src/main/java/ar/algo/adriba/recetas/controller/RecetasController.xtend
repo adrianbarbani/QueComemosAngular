@@ -110,14 +110,14 @@ class RecetasController {
 		ok('{ "status" : "OK" }')
 	}
 	
-	@Get("/buscar/")
+	@Post("/buscar/")
 	def Result buscar(@Body String body) {
 		var consultas = new UltimasConsultasAppModel(usr)
 		var ParceBusqueda aux = body.fromJson(ParceBusqueda)
 		
 		consultas.caloriasDesde = 1//Integer.parseInt(body.getPropertyValue("caloriasDesde"))
 		consultas.caloriasHasta = 20000//Integer.parseInt(body.getPropertyValue("caloriasHasta"))
-		consultas.nombre = "Mila"//aux.nombreReceta
+		consultas.nombre = aux.nombreReceta
 		consultas.dificultadSeleccionada= null
 		consultas.temporadaSeleccionada= null
 		consultas.ingredienteABuscar= null //body.getPropertyValue("ingrediente")

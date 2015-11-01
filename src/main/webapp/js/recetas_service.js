@@ -21,7 +21,7 @@ recetasListApp.service("RecetasService", function ($http) {
     };
     
     this.buscar = function(infoBuscar, callback){
-    	$http.get('/buscar/', infoBuscar).then(callback);
+    	$http.post('/buscar/', infoBuscar).then(callback);
 
     };
 
