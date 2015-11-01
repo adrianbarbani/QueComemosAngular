@@ -90,6 +90,20 @@ class RecetasController {
 		ok('{ "status" : "OK" }')
 	}
 	
+	@Get("/buscar/")
+	def Result buscar(@Body String body) {
+		var consultas = new UltimasConsultasAppModel(usr)
+		consultas.caloriasDesde = Integer.parseInt(body.getPropertyValue("caloriasDesde"))
+		consultas.caloriasHasta = Integer.parseInt(body.getPropertyValue("caloriasHasta"))
+		consultas.nombre= body.getPropertyValue("nombreReceta")
+		consultas.dificultadSeleccionada= null
+		consultas.temporadaSeleccionada= null
+		consultas.ingredienteABuscar= body.getPropertyValue("ingrediente")
+		consultas.buscar()
+		
+		response.contentType = ContentType.APPLICATION_JSON
+		ok(consultas.resultados.toJson)
+	}
 	//------------------------------------------------------------------
 	def listarLasRecetas() {
 		val appModel = new UltimasConsultasAppModel(usr)

@@ -6,7 +6,9 @@ import ar.algo.adriba.tp1.Receta
 import ar.algo.adriba.tp1.RepositorioRecetas
 import ar.algo.adriba.tp1.Usuario
 import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
 
+@Accessors
 class UltimasConsultasAppModel {
 		//Hardcodeo un usuario
 

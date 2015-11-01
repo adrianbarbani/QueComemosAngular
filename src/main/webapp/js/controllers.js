@@ -6,16 +6,28 @@ recetasListApp.controller('ListarRecetasController', function(RecetasService) {
 
 	// trae las recetas
 	this.getRecetas = function() {
-		RecetasService.findAll(function(data) {
-			self.recetas = data.data;
-		});
+		RecetasService.findAll(
+		function(data) {
+			self.recetas = data.data;}
+		);
 	}
+	
+	this.buscar = function() {
+		RecetasService.buscar({
+			"nombreReceta" : self.nombreReceta,
+			"caloriasDesde" : self.caloriasDesde,
+			"caloriasHasta": self.caloriasHasta,
+			"ingrediente":self.ingrediente,
+			
+		},(function(data) {
+			self.recetas = data.data;}
+		))
+
+	};
 
 	this.getRecetas();
-
-	/*
-	 * this.recetas = RecetasService.recetas; RecetasService.listarRecetas();
-	 */
+	
+	
 
 });
 
