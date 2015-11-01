@@ -1,5 +1,6 @@
 package ar.algo.adriba.recetas.controller
 
+import ar.algo.adriba.appModel.CopiarRecetaAppModel
 import ar.algo.adriba.appModel.DetalleDeRecetaAppModel
 import ar.algo.adriba.appModel.LoginAppModel
 import ar.algo.adriba.appModel.RecetasObjectSet
@@ -7,6 +8,8 @@ import ar.algo.adriba.appModel.UltimasConsultasAppModel
 import ar.algo.adriba.appModel.UsuariosObjectSet
 import ar.algo.adriba.tp1.Busqueda
 import ar.algo.adriba.tp1.Receta
+import ar.algo.adriba.tp1.RepoDeTemporadas
+import ar.algo.adriba.tp1.RepoDificultades
 import ar.algo.adriba.tp1.Usuario
 import java.util.List
 import org.uqbar.xtrest.api.Result
@@ -17,7 +20,6 @@ import org.uqbar.xtrest.api.annotation.Get
 import org.uqbar.xtrest.api.annotation.Post
 import org.uqbar.xtrest.http.ContentType
 import org.uqbar.xtrest.json.JSONUtils
-import ar.algo.adriba.appModel.CopiarRecetaAppModel
 
 @Controller
 class RecetasController {
@@ -60,6 +62,22 @@ class RecetasController {
 		ok(recetas.toJson)
 	}
 	
+	@Get("/temporadas")
+	def Result temporadas() {
+		var temporadas = RepoDeTemporadas.getInstance.dameLasTemporadas()
+
+		response.contentType = ContentType.APPLICATION_JSON
+		ok(temporadas.toJson)
+	}
+	
+	@Get("/dificultades")
+	def Result dificultades() {
+		var dificultades = RepoDificultades.getInstance.getTodasLasDificultades()
+
+		response.contentType = ContentType.APPLICATION_JSON
+		ok(dificultades.toJson)
+	}
+	
 	
 	@Get("/receta/:id")
 	def Result getRecetaByNombre(@Body String body) {
@@ -72,6 +90,8 @@ class RecetasController {
 		response.contentType = ContentType.APPLICATION_JSON
 		ok(receta.toJson)
 	}
+	
+	
 	
  	 @Post("/copiar/")
 	def Result receta(@Body String body) {
@@ -93,12 +113,14 @@ class RecetasController {
 	@Get("/buscar/")
 	def Result buscar(@Body String body) {
 		var consultas = new UltimasConsultasAppModel(usr)
-		consultas.caloriasDesde = Integer.parseInt(body.getPropertyValue("caloriasDesde"))
-		consultas.caloriasHasta = Integer.parseInt(body.getPropertyValue("caloriasHasta"))
-		consultas.nombre= body.getPropertyValue("nombreReceta")
+		var ParceBusqueda aux = body.fromJson(ParceBusqueda)
+		
+		consultas.caloriasDesde = 1//Integer.parseInt(body.getPropertyValue("caloriasDesde"))
+		consultas.caloriasHasta = 20000//Integer.parseInt(body.getPropertyValue("caloriasHasta"))
+		consultas.nombre = "Mila"//aux.nombreReceta
 		consultas.dificultadSeleccionada= null
 		consultas.temporadaSeleccionada= null
-		consultas.ingredienteABuscar= body.getPropertyValue("ingrediente")
+		consultas.ingredienteABuscar= null //body.getPropertyValue("ingrediente")
 		consultas.buscar()
 		
 		response.contentType = ContentType.APPLICATION_JSON

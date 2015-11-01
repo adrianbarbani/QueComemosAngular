@@ -4,6 +4,14 @@ recetasListApp.service("RecetasService", function ($http) {
         $http.get('/recetas').then(callback);
     };
     
+    this.findDificultades = function(callback) {
+        $http.get('/dificultades').then(callback);
+    };
+    
+    this.findTemporadas = function(callback) {
+        $http.get('/temporadas').then(callback);
+    };
+    
     this.getRecetaByNombre = function(id, callback) {
 		$http.get('/receta/'+id).then(callback);
 	};

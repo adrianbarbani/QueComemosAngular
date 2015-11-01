@@ -23,6 +23,10 @@ class RepoDeTemporadas {
 			add("Primavera")
 		]
 	}
+	
+	def dameLasTemporadas(){
+		todasLasTemporadas
+	}
 
 	static public def RepoDeTemporadas getInstance() {
 		if (repositorio == null) {

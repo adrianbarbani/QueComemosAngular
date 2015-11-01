@@ -31,11 +31,15 @@
   								</div>
   								<div class="col-md-6">
 									<label>Dificultad</label> 
-									<g:select name="dificultad" from="${repoDeDificultades?.todasLasDificultades}"/>
+									<select name="dificultad"  ng-model="listarCtrl.dificultadElegida">
+     								 <option ng-repeat="dificultad in listarCtrl.dificultades" value="{{option.id}}">{{dificultad}}</option>
+    								</select>
   								</div>
   								<div class="col-md-6">
 									<label>Temporada</label> 
-									<g:select name="temporada" from="${repoDeTemporadas?.todasLasTemporadas}"/>
+									<select name="temporda"  ng-model="listarCtrl.temporadaElegida">
+     								 <option ng-repeat="temporada in listarCtrl.temporadas" value="{{option.id}}">{{temporada}}</option>
+    								</select>
   								</div>
   								<div class="col-md-6">
 									<label>Que Contenga Ingrediente</label> 

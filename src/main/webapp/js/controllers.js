@@ -3,7 +3,9 @@ recetasListApp.controller('ListarRecetasController', function(RecetasService) {
 
 	var self = this;
 	this.recetas = [];
-
+	this.temporadas = [];
+	this.dificultades = [];
+	
 	// trae las recetas
 	this.getRecetas = function() {
 		RecetasService.findAll(
@@ -12,12 +14,31 @@ recetasListApp.controller('ListarRecetasController', function(RecetasService) {
 		);
 	}
 	
+	//trae temporadas
+	this.getTemporadas = function(){
+		RecetasService.findTemporadas(
+				function(data){
+					self.temporadas = data.data;
+				});
+	}
+	
+	//trae dificultades
+	this.getDificultades = function(){
+		RecetasService.findDificultades(
+				function(data){
+					self.dificultades = data.data;
+				});
+	}
+	
+	//buscar
 	this.buscar = function() {
 		RecetasService.buscar({
 			"nombreReceta" : self.nombreReceta,
 			"caloriasDesde" : self.caloriasDesde,
 			"caloriasHasta": self.caloriasHasta,
 			"ingrediente":self.ingrediente,
+			"temporada":self.temporadaElegida,
+			"dificultad":self.dificultadElegida
 			
 		},(function(data) {
 			self.recetas = data.data;}
@@ -26,8 +47,8 @@ recetasListApp.controller('ListarRecetasController', function(RecetasService) {
 	};
 
 	this.getRecetas();
-	
-	
+	this.getTemporadas();
+	this.getDificultades();
 
 });
 
