@@ -115,12 +115,12 @@ class RecetasController {
 		var consultas = new UltimasConsultasAppModel(usr)
 		var ParceBusqueda aux = body.fromJson(ParceBusqueda)
 		
-		consultas.caloriasDesde = 1//Integer.parseInt(body.getPropertyValue("caloriasDesde"))
-		consultas.caloriasHasta = 20000//Integer.parseInt(body.getPropertyValue("caloriasHasta"))
+		consultas.caloriasDesde = aux.caloriasDesde
+		consultas.caloriasHasta = aux.caloriasHasta
 		consultas.nombre = aux.nombreReceta
-		consultas.dificultadSeleccionada= null
-		consultas.temporadaSeleccionada= null
-		consultas.ingredienteABuscar= null //body.getPropertyValue("ingrediente")
+		consultas.dificultadSeleccionada= aux.dificultad	
+		consultas.temporadaSeleccionada= aux.temporada
+		consultas.ingredienteABuscar= aux.ingrediente 
 		consultas.buscar()
 		
 		response.contentType = ContentType.APPLICATION_JSON

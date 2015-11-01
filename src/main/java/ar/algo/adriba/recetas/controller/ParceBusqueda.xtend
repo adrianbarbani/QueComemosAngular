@@ -8,4 +8,6 @@ class ParceBusqueda {
 	int caloriasDesde
 	int caloriasHasta
 	String ingrediente
+	String dificultad
+	String temporada
 }

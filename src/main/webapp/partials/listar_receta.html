@@ -1,9 +1,8 @@
 <div class="panel panel-default">
 				<div class="panel-heading">
-					<a data-toggle="collapse"
-						data-parent="#accordion1" href="#collapseOne">
-						Par&aacute;metros de b&uacute;squeda
-					</a>
+					<h4>
+						Par&aacute;metros de b&uacute;squeda:
+					</h4>
 				</div>
 				<div id="collapseOne" class="panel-collapse collapse in">
 					<div class="panel-body">
@@ -31,14 +30,14 @@
   								</div>
   								<div class="col-md-6">
 									<label>Dificultad</label> 
-									<select name="dificultad"  ng-model="listarCtrl.dificultadElegida">
-     								 <option ng-repeat="dificultad in listarCtrl.dificultades" value="{{option.id}}">{{dificultad}}</option>
+									<select name="dificultadElegida"  ng-model="listarCtrl.dificultadElegida">
+     								 <option ng-repeat="dificultad in listarCtrl.dificultades" >{{dificultad}}</option>
     								</select>
   								</div>
   								<div class="col-md-6">
 									<label>Temporada</label> 
-									<select name="temporda"  ng-model="listarCtrl.temporadaElegida">
-     								 <option ng-repeat="temporada in listarCtrl.temporadas" value="{{option.id}}">{{temporada}}</option>
+									<select name="tempordaElegida"  ng-model="listarCtrl.temporadaElegida">
+     								 <option ng-repeat="temporada in listarCtrl.temporadas" >{{temporada}}</option>
     								</select>
   								</div>
   								<div class="col-md-6">
