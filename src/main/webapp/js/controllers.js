@@ -4,7 +4,7 @@ recetasListApp.controller('ListarRecetasController', function(RecetasService) {
 	var self = this;
 	this.recetas = [];
 
-	//trae las recetas
+	// trae las recetas
 	this.getRecetas = function() {
 		RecetasService.findAll(function(data) {
 			self.recetas = data.data;
@@ -24,33 +24,48 @@ recetasListApp.controller('ShowRecetaController', function($stateParams,
 
 	var self = this;
 	var receta;
-		
+
 	this.mostrar = function() {
 		RecetasService.getRecetaByNombre($stateParams.id, function(data) {
 			self.receta = data.data;
 		})
-		
+
 	};
 
 	this.mostrar();
-	
+
 	this.volver = function() {
 		$state.go("listarReceta");
 	};
 
 });
 
-recetasListApp.controller('CopiarRecetaController', function($stateParams, $state,
-		$timeout, UsuariosService, RecetasService, SessionService) {
-	
+recetasListApp.controller('CopiarRecetaController', function($stateParams,
+		$state, $timeout, RecetasService) {
+
 	var self = this;
 	var receta;
+
+
+	this.obtenerReceta = function() {
+		RecetasService.getRecetaByNombre($stateParams.id, function(data) {
+			self.receta = data.data;
+		})
+
+	};
+	this.obtenerReceta();
+
+	this.copiar = function() {
+		RecetasService.copiarReceta(({
+			"nombreDeCopia" : self.nombreDeCopia,
+			"numeroId": self.receta.numeroId 
+			}), this.volver)
+	};
 	
-	this.copiar = function(){
-		RecetasService.copiarReceta({
-			"nombreDeCopia" : self.nombreDeCopia})};
-	
-	
+	this.volver = function() {
+		$state.go("listarReceta");
+	};
+
 });
 
 recetasListApp.controller('LoginController', function($stateParams, $state,
@@ -63,23 +78,22 @@ recetasListApp.controller('LoginController', function($stateParams, $state,
 		UsuariosService.loguear({
 			"nombreUsuarioABuscar" : self.nombreUsuarioABuscar,
 			"contrasenia" : self.contrasenia
-		}, this.loguear, this.notificarError );
+		}, this.loguear, this.notificarError);
 
 	};
 
-	//guarda el usr
+	// guarda el usr
 	this.loguear = function(data) {
 		SessionService.loguearUsuario(data.data);
 		$state.go("listarReceta");
-		
+
 	}
 
-	this.notificarError = function (mensaje) {
+	this.notificarError = function(mensaje) {
 		self.errors.push(mensaje.data);
 		$timeout(function() {
 			while (self.errors.length > 0)
 				self.errors.pop();
 		}, 3000);
-	}
-	;
+	};
 });

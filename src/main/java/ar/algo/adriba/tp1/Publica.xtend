@@ -37,7 +37,7 @@ class Publica implements TipoReceta {
 
 	override crearUnaCopiaPropia(Receta receta, Usuario usuario, String string) {
 		var recetaAModificar = new Receta(receta,usuario)
-		if (string.equals(null)) {
+		if (string==null) {
 			recetaAModificar.nombreDelPlato = receta.nombreDelPlato
 		} else {
 			recetaAModificar.nombreDelPlato = string

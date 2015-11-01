@@ -13,9 +13,14 @@ class CopiarRecetaAppModel {
 	String nombreDeCopia
 	Usuario usuario
 
-	new(Receta unaReceta, Usuario unUsuario) {
+	new (String nombre){
+		nombreDeCopia = nombre
+	}
+	
+	new(Receta unaReceta, Usuario unUsuario, String nombre) {
 		receta = unaReceta
 		usuario = unUsuario
+		
 	}
 
 	def copiarReceta() {

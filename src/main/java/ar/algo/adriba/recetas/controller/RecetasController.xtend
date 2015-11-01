@@ -64,6 +64,7 @@ class RecetasController {
 	def Result getRecetaByNombre(@Body String body) {
 		
 		var Busqueda busqueda = new Busqueda(usr)
+		
 		var detalleReceta = new DetalleDeRecetaAppModel(busqueda.buscarPorId(body),usr)
 		var Receta receta = detalleReceta.unaReceta
 			
@@ -71,18 +72,20 @@ class RecetasController {
 		ok(receta.toJson)
 	}
 	
-	/* @Post("/copiarReceta/:id")
+ 	 @Post("/copiar/")
 	def Result receta(@Body String body) {
 		
 		var Busqueda busqueda = new Busqueda(usr)
-		var copiaReceta = new CopiarRecetaAppModel(busqueda.buscarRecetaPorNombre(body),usr)
 		
-		copiaReceta.nombreDeCopia = ????????
+		var Parce aux = body.fromJson(Parce)
+		var receta = busqueda.buscarPorId(aux.numeroId)
+		var copiaReceta = new CopiarRecetaAppModel(busqueda.buscarPorId(aux.numeroId),usr,aux.nombreDeCopia)
+		
 		copiaReceta.copiarReceta()	
 		
 		response.contentType = ContentType.TEXT_PLAIN
 		ok()
-	}*/
+	}
 	
 	//------------------------------------------------------------------
 	def listarLasRecetas() {
