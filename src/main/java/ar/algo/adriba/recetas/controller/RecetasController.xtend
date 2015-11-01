@@ -25,7 +25,8 @@ class RecetasController {
 	Usuario usr
 
 	extension JSONUtils = new JSONUtils
-
+	extension JSONPropertyUtils = new JSONPropertyUtils
+	
 	def static void main(String[] args) {
 		XTRest.start(RecetasController, 9000)
 	}
@@ -53,7 +54,7 @@ class RecetasController {
 	def Result Recetas() {
 		RecetasObjectSet.INSTANCE.crearRecetas(usr)
 
-		var recetas = listarLasRecetas()
+		var List<Receta> recetas = listarLasRecetas()
 
 		response.contentType = ContentType.APPLICATION_JSON
 		ok(recetas.toJson)
@@ -77,14 +78,16 @@ class RecetasController {
 		
 		var Busqueda busqueda = new Busqueda(usr)
 		
-		var Parce aux = body.fromJson(Parce)
-		var receta = busqueda.buscarPorId(aux.numeroId)
-		var copiaReceta = new CopiarRecetaAppModel(busqueda.buscarPorId(aux.numeroId),usr,aux.nombreDeCopia)
+		var id = body.getPropertyValue("numeroId")
+		var String nombreDeCopia = body.getPropertyValue("nombreDeCopia") 
+		
+		var copiaReceta = new CopiarRecetaAppModel(busqueda.buscarPorId(id),usr,nombreDeCopia)
+		
 		
 		copiaReceta.copiarReceta()	
 		
 		response.contentType = ContentType.TEXT_PLAIN
-		ok()
+		ok('{ "status" : "OK" }')
 	}
 	
 	//------------------------------------------------------------------

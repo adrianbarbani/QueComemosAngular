@@ -16,7 +16,7 @@ public class Receta extends Entity implements Cosas  {
 	int caloriasReceta
 	String dificultad
 	String temporada
-	TipoReceta tipo = new Publica
+	TipoReceta tipo 
 	String numeroId
 	
 	
@@ -77,6 +77,7 @@ public class Receta extends Entity implements Cosas  {
 			caloriasReceta = unaReceta.caloriasReceta
 			dificultad = unaReceta.dificultad
 			temporada = unaReceta.temporada
+			numeroId = this.generarId(unaReceta)
 		]
 	}
 
@@ -151,6 +152,13 @@ public class Receta extends Entity implements Cosas  {
 	
 	def setearNombre(String string) {
 		nombreDelPlato = string
+	}
+	
+	def String generarId(Receta unaReceta){  
+		var nuevoId = (Integer.parseInt(unaReceta.numeroId)) * 1000
+		var id = Integer.toString(nuevoId)
+		id
+		
 	}
 	
 }

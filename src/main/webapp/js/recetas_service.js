@@ -8,7 +8,7 @@ recetasListApp.service("RecetasService", function ($http) {
 		$http.get('/receta/'+id).then(callback)
 	}
     
-    this.copiarReceta = function(recetaData, callback){
+    this.copiarReceta = function(recetaData,callback){
     	$http.post('/copiar/', recetaData).then(callback)
     }
     
