@@ -13,7 +13,7 @@ recetasListApp.service("RecetasService", function ($http) {
     };
     
     this.getRecetaByNombre = function(id, callback) {
-		$http.get('/receta/'+id).then(callback);
+		$http.post('/receta/'+id, id).then(callback);
 	};
     
     this.copiarReceta = function(recetaData,callback){

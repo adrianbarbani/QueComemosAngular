@@ -79,7 +79,7 @@ class RecetasController {
 	}
 	
 	
-	@Get("/receta/:id")
+	@Post("/receta/:id")
 	def Result getRecetaByNombre(@Body String body) {
 		
 		var Busqueda busqueda = new Busqueda(usr)
