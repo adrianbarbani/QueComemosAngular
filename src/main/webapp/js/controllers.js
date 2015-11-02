@@ -41,6 +41,7 @@ recetasListApp.controller('ListarRecetasController', function(RecetasService) {
 			"dificultad":self.dificultadElegida
 			
 		},(function(data) {
+			self.recetas=[];
 			self.recetas = data.data;}
 		))
 
