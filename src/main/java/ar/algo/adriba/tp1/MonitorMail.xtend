@@ -28,7 +28,7 @@ class MonitorMail extends Monitor {
 			from = "que@comemos.com"
 			titulo = "Notificacion de consulta de usuario " + persona.getNombre()
 			message = 
-			"Cantidad de recetas: " + String.valueOf(this.cantidadDeRecetas(recetas)) + " " + "Filtros usados: " + String.join(", ", filtros.map[filtro|filtro.nombreFiltro])
+			"Cantidad de recetas: " + String.valueOf(this.cantidadDeRecetas(recetas)) + " " + "Filtros usados: " + filtros.map[filtro|filtro.nombreFiltro].join(", ")
 				
 		]
 		

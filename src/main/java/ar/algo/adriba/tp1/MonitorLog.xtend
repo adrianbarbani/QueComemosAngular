@@ -16,7 +16,7 @@ class MonitorLog extends Monitor {
 	}
 
 	override doExecute(List<Receta> recetas, Persona persona, List<Filtro> filtros) {
-		this.log(String.join(", ", recetas.map[receta|receta.nombreDelplato]))
+		this.log(recetas.map[receta|receta.nombreDelplato].join(", "))
 	}
 
 	def void log(String string) {

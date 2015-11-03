@@ -1,12 +1,14 @@
 package ar.algo.adriba.tp1
 
-import ar.algo.adriba.tp1.TipoReceta
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import org.eclipse.xtend.lib.annotations.Accessors
+import com.fasterxml.jackson.annotation.JsonIgnore
 
+@JsonIgnoreProperties(ignoreUnknown=true)
 @Accessors
 class Privada implements TipoReceta {
 
-	Usuario duenio 
+	@JsonIgnore Usuario duenio 
 	String nombre
 	String defi = new String("Privada")
 	
@@ -56,7 +58,7 @@ class Privada implements TipoReceta {
 	
 	override crearUnaCopiaPropia(Receta receta, Usuario usuario, String string) {
 		var recetaAModificar = new Receta(receta, usuario)
-		nombre = string
+		recetaAModificar.nombreDelPlato = string
 		this.cambiarValores(usuario, recetaAModificar, receta)
 	}
 	

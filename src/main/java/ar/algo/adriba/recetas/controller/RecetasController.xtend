@@ -1,15 +1,13 @@
 package ar.algo.adriba.recetas.controller
 
-import ar.algo.adriba.appModel.CopiarReceta
+import ar.algo.adriba.appModel.CopiarRecetaAppModel
 import ar.algo.adriba.appModel.DetalleDeRecetaAppModel
 import ar.algo.adriba.appModel.LoginAppModel
 import ar.algo.adriba.appModel.RecetasObjectSet
 import ar.algo.adriba.appModel.UltimasConsultasAppModel
 import ar.algo.adriba.appModel.UsuariosObjectSet
 import ar.algo.adriba.tp1.Busqueda
-import ar.algo.adriba.tp1.Privada
 import ar.algo.adriba.tp1.Receta
-import ar.algo.adriba.tp1.RecetaBuilder
 import ar.algo.adriba.tp1.RepoDeTemporadas
 import ar.algo.adriba.tp1.RepoDificultades
 import ar.algo.adriba.tp1.Usuario
@@ -33,20 +31,21 @@ class RecetasController {
 
 	def static void main(String[] args) {
 		XTRest.start(RecetasController, 9000)
+		UsuariosObjectSet.INSTANCE.crearUsuarios
 	}
 
 	@Post("/login/")
 	def Result login(@Body String body) {
 		val LoginAppModel login = body.fromJson(LoginAppModel)
-		UsuariosObjectSet.INSTANCE.crearUsuarios
 
 		try {
 
 			login.autorizarLogin
 			usr = login.usuarioLogin
+			
 			RecetasObjectSet.INSTANCE.crearRecetas(usr)
 
-			response.contentType = ContentType.TEXT_PLAIN
+			response.contentType = ContentType.APPLICATION_JSON
 			ok(login.nombreUsuarioABuscar.toJson)
 
 		} catch (Exception e) {
@@ -80,10 +79,9 @@ class RecetasController {
 		ok(dificultades.toJson)
 	}
 
-	@Post("/receta/:id")
-	def Result getRecetaByNombre(@Body String body) {
-
-		var Receta receta = getDetalleRecetaAppModel(body).unaReceta
+	@Get("/receta/:id")
+	def Result getRecetaByNombre() {
+		var Receta receta = getDetalleRecetaAppModel(id).unaReceta
 
 		response.contentType = ContentType.APPLICATION_JSON
 		ok(receta.toJson)
@@ -93,8 +91,7 @@ class RecetasController {
 	def getDetalleRecetaAppModel(String body) {
 		var Busqueda busqueda = new Busqueda(usr)
 
-		var detalleReceta = new DetalleDeRecetaAppModel(busqueda.buscarPorId(body), usr)
-		detalleReceta
+		new DetalleDeRecetaAppModel(busqueda.buscarPorId(body), usr)
 	}
 
 	//hacer favorita
@@ -111,30 +108,19 @@ class RecetasController {
 	}
 
 	@Post("/copiar/")
-	def Result receta(@Body String body) {
+	def Result copiar(@Body String body) {
 
 		var Busqueda busqueda = new Busqueda(usr)
 
 		var id = body.getPropertyValue("numeroId")
 		var String nombreDeCopia = body.getPropertyValue("nombreDeCopia")
 
-		var copiaReceta = new CopiarReceta(busqueda.buscarPorId(id), usr, nombreDeCopia)
-
-
-		copiaReceta.copiar()
+		var copiaReceta = new CopiarRecetaAppModel(busqueda.buscarPorId(id), usr, nombreDeCopia)
 		
-//		new RecetaBuilder()
-//			.tipoDeReceta(new Privada(usr))
-//			.nombreDelPlato("xxxxxxx")
-//			.setearTemporadas("Todo el año")
-//			.setearCalorias(150)
-//			.setearDificultad("Dificil")
-//			.setearPreparacion("Pasar la carne por huevo, harina y pan rallado. Freir con el aceite por 10 minutos")
-//			.setearNumeroId("23")
-//			.build
+		copiaReceta.copiar()
 
 		response.contentType = ContentType.TEXT_PLAIN
-		ok('{ "status" : "OK" }')
+		ok()
 	}
 
 	@Post("/buscar/")
@@ -157,9 +143,7 @@ class RecetasController {
 	//------------------------------------------------------------------
 	def listarLasRecetas() {
 		val appModel = new UltimasConsultasAppModel(usr)
-		appModel.initSearch()
-
-		var List<Receta> recetas = appModel.resultados
-		recetas
+		appModel.initSearch
+		appModel.resultados
 	}
 }

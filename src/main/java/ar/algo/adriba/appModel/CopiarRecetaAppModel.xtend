@@ -20,10 +20,10 @@ class CopiarRecetaAppModel {
 	new(Receta unaReceta, Usuario unUsuario, String nombre) {
 		receta = unaReceta
 		usuario = unUsuario
-		
+		nombreDeCopia = nombre
 	}
 
-	def copiarReceta() {
+	def copiar() {
 		receta.crearCopia(usuario, nombreDeCopia)
 	}
 }

@@ -101,9 +101,10 @@ class  Usuario extends Persona {
 
 	// Si es valida, la copiamos en una variable local que llama al constructor de recetas privadas.
 	def Receta copiar(Receta unaReceta) {
-		var Receta miReceta = null
-		miReceta = new Receta(unaReceta, this)
-		miReceta
+		
+		 new Receta(unaReceta, this)
+		
+		
 	}
 
 	// Finalmente, agregamos la receta a la coleccion de recetas del usuario.

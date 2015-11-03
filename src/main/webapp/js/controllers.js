@@ -41,7 +41,6 @@ recetasListApp.controller('ListarRecetasController', function(RecetasService) {
 			"dificultad":self.dificultadElegida
 			
 		},(function(data) {
-			self.recetas=[];
 			self.recetas = data.data;}
 		))
 
@@ -86,7 +85,7 @@ recetasListApp.controller('CopiarRecetaController', function($stateParams,
 		$state, $timeout, RecetasService) {
 
 	var self = this;
-	var receta=$stateParams.id
+	var receta;
 
 
 	this.obtenerReceta = function() {
