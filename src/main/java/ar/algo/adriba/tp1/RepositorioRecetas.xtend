@@ -2,12 +2,14 @@ package ar.algo.adriba.tp1
 
 import java.util.ArrayList
 import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.utils.Observable
 
+@Accessors
 @Observable
 public class RepositorioRecetas implements Repositorio {
 
-	public List<Receta> listarTodas = new ArrayList<Receta>
+	List<Receta> listarTodas = new ArrayList<Receta>
 
 	static RepositorioRecetas repositorio = null
 	/*Comida carne = new Comida(0, "Carne", 1)

@@ -1,6 +1,6 @@
 package ar.algo.adriba.recetas.controller
 
-import ar.algo.adriba.appModel.CopiarRecetaAppModel
+import ar.algo.adriba.appModel.CopiarReceta
 import ar.algo.adriba.appModel.DetalleDeRecetaAppModel
 import ar.algo.adriba.appModel.LoginAppModel
 import ar.algo.adriba.appModel.RecetasObjectSet
@@ -116,9 +116,9 @@ class RecetasController {
 		var id = body.getPropertyValue("numeroId")
 		var String nombreDeCopia = body.getPropertyValue("nombreDeCopia")
 
-		var copiaReceta = new CopiarRecetaAppModel(busqueda.buscarPorId(id), usr, nombreDeCopia)
+		var copiaReceta = new CopiarReceta(busqueda.buscarPorId(id), usr, nombreDeCopia)
 
-		copiaReceta.copiarReceta()
+		copiaReceta.copiar()
 
 		response.contentType = ContentType.TEXT_PLAIN
 		ok('{ "status" : "OK" }')
