@@ -7,7 +7,9 @@ import ar.algo.adriba.appModel.RecetasObjectSet
 import ar.algo.adriba.appModel.UltimasConsultasAppModel
 import ar.algo.adriba.appModel.UsuariosObjectSet
 import ar.algo.adriba.tp1.Busqueda
+import ar.algo.adriba.tp1.Privada
 import ar.algo.adriba.tp1.Receta
+import ar.algo.adriba.tp1.RecetaBuilder
 import ar.algo.adriba.tp1.RepoDeTemporadas
 import ar.algo.adriba.tp1.RepoDificultades
 import ar.algo.adriba.tp1.Usuario
@@ -42,6 +44,7 @@ class RecetasController {
 
 			login.autorizarLogin
 			usr = login.usuarioLogin
+			RecetasObjectSet.INSTANCE.crearRecetas(usr)
 
 			response.contentType = ContentType.TEXT_PLAIN
 			ok(login.nombreUsuarioABuscar.toJson)
@@ -54,7 +57,6 @@ class RecetasController {
 
 	@Get("/recetas")
 	def Result Recetas() {
-		RecetasObjectSet.INSTANCE.crearRecetas(usr)
 
 		var List<Receta> recetas = listarLasRecetas()
 
@@ -118,7 +120,18 @@ class RecetasController {
 
 		var copiaReceta = new CopiarReceta(busqueda.buscarPorId(id), usr, nombreDeCopia)
 
+
 		copiaReceta.copiar()
+		
+//		new RecetaBuilder()
+//			.tipoDeReceta(new Privada(usr))
+//			.nombreDelPlato("xxxxxxx")
+//			.setearTemporadas("Todo el año")
+//			.setearCalorias(150)
+//			.setearDificultad("Dificil")
+//			.setearPreparacion("Pasar la carne por huevo, harina y pan rallado. Freir con el aceite por 10 minutos")
+//			.setearNumeroId("23")
+//			.build
 
 		response.contentType = ContentType.TEXT_PLAIN
 		ok('{ "status" : "OK" }')

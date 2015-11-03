@@ -67,6 +67,7 @@ recetasListApp.controller('ShowRecetaController', function($stateParams,
 
 	};
 
+	//hacer favorita
 	this.hacerFavorita = function(){
 		UsuariosService.hacerFavorita({
 		"favorita":self.value1,
